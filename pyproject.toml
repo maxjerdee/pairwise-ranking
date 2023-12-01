@@ -1,0 +1,35 @@
+# pyproject.toml
+
+[build-system]
+requires      = ["setuptools>=61.0.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pairwise-ranking"
+version = "1.0.0"
+description = "Infer strengths and rankings from paired comparisons"
+readme = "README.md"
+authors = [
+    { name = "Maximilian Jerdee", email = "mjerdee@umich.edu" }, 
+    { name = "Mark Newman", email = "mejn@umich.edu" },
+]
+license = { file = "LICENSE" }
+classifiers = [
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+]
+keywords = ["ranking", "statistics", "rating", "bayesian"]
+dependencies = [
+    "pystan >= 3.7.0",
+    "matplotlib >= 3.8.0",
+    "numpy >= 1.26.0",
+    "scipy >= 1.11.3",
+]
+requires-python = ">=3.9"
+
+[project.optional-dependencies]
+dev = ["black", "bumpver", "isort", "pip-tools", "pytest"]
+
+[project.urls]
+Homepage = "https://github.com/maxjerdee/pairwise-ranking"
