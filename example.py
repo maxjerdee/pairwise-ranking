@@ -1,5 +1,7 @@
-from ranking import util
+from ranking import parsing, sampling
 
-adj_matrix, labels = util.read_outcome_list("data/outcome_lists/dogs.txt")
+match_list = parsing.read_match_list_from_gml("data/gml_files/dogs.gml")
 
-print(adj_matrix)
+print(sampling.samples(match_list))
+
+print(sampling.samples(match_list))
