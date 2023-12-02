@@ -1,2 +1,2 @@
 # pairwise-ranking
-Python package for pairwise ranking
+Python package for non-sequential pairwise ranking
