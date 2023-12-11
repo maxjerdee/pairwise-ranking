@@ -3,20 +3,15 @@
 from scipy.sparse import lil_matrix
 import networkx as nx
 import numpy as np
+from os.path import isfile
 
 def read_match_list_from_match_list(filename):
-    """Read list of matches from a file with each line in "winner loser" format.
+    """Read list of matches from a file where each line represents a match in the format "winner loser".
 
-    Args:
-        filename (string): Input filename.
-
-    Raises:
-        AssertionError: Each line must be in "winner loser" format.
-
-    Returns:
-        list: List of matches, each represented by a dict of the winner and loser.
-    """
-
+    :param filename: Input filename
+    :type filename: str
+    :raises AssertionError: If a line is not in "winner loser" format. Labels should not themselves include spaces.
+    """    
     # Store the tuples of winner and loser indices since we first need to find the number of players
     match_list = []
 
@@ -33,16 +28,14 @@ Format as "winner loser" (make sure the names don\'t have spaces)'
 
     return match_list
 
-
 def read_match_list_from_gml(filename):
-    """Read list of matches as the edges in a gml file.
+    """Read list of matches as the edges in a gml network file.
 
-    Args:
-        filename (string): Input filename.
-
-    Returns:
-        list: List of matches, each represented by a dict of the winner and loser.
-    """
+    :param filename: Input filename
+    :type filename: str
+    :return: List of matches, each represented by a dict of the winner and loser. 
+    :rtype: list
+    """    
     # Read in with networkX
     G = nx.read_gml(filename)
     edges = list(G.edges())
@@ -56,7 +49,13 @@ def read_match_list_from_gml(filename):
 
 
 def read_match_list_from_adj_matrix(filename):
-    
+    """Read list of matches from an adjacency matrix which counts the number of times each player beats another. In lieu of labels, assign in the form player_i.
+
+    :param filename: Input filename
+    :type filename: str
+    :return: List of matches, each represented by a dict of the winner and loser. 
+    :rtype: list
+    """    
     adj_matrix = np.loadtxt(filename,dtype=int)
     n = len(adj_matrix)
 
@@ -71,7 +70,34 @@ def read_match_list_from_adj_matrix(filename):
 
     return match_list
 
-
-
 def read_match_list(filename):
-    pass
+    """Read list of matches from a file, attempting to detect the appropriate file format among gml, match_list, or adjacency_matrix formats.
+
+    :param filename: Input filename
+    :type filename: str
+    :return: List of matches, each represented by a dict of the winner and loser. 
+    :rtype: list
+    """    
+    # First check that the file exists
+    f_in = open(filename)
+
+    # Attempt to read the file in the other of: gml, match_list, adj_matrix
+    try:
+        return read_match_list_from_gml(filename)
+    except Exception:
+        pass
+    try:
+        return read_match_list_from_match_list(filename)
+    except Exception:
+        pass
+    try:
+        return read_match_list_from_adj_matrix(filename)
+    except Exception:
+        pass
+
+    # If all methods have failed, raise error
+    raise AssertionError(
+        f"Unable to parse {filename} as a gml, match list, or adjacency matrix."
+    )
+
+        

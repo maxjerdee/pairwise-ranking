@@ -109,17 +109,16 @@ STAN_strings_dict = {
     "logistic_prior": logistic_prior_STAN_string,
 }
 
-
 def get_STAN_data(match_list, string_indices_dict):
     """Convert the match_list into a format for our STAN models.
 
-    Args:
-        match_list (list): List of matches, each represented by a dict of the winner and loser.
-        string_indices_dict (dict): Dict that associates to each found string a unique index.
-
-    Returns:
-        dict: STAN_data representation of the match_list for STAN.
-    """
+    :param match_list: List of matches, each represented by a dict of the winner and loser.
+    :type match_list: list
+    :param string_indices_dict: dict that associates a unique index to each found string.
+    :type string_indices_dict: dict
+    :return: representation of the match_list for STAN.
+    :rtype: dict
+    """    
     n = len(string_indices_dict)  # Number of players
 
     # Initializing STAN_data variables to be built up
@@ -178,7 +177,7 @@ def _samples(
     # STAN model string to be passed to pystan
     STAN_model_string = STAN_strings_dict[model_name]
 
-    print(f"Using model {model_name}")
+    # print(f"Using model {model_name}")
 
     # Assign an index to each string in the match list
     string_indices_dict = util.get_string_indices_dict(match_list)
@@ -214,27 +213,24 @@ def _samples(
 
     return df
 
-
 # TODO: switch to a permanent cache between executables. Store samples in local directory?
 # Should probably add the option to not cache samples as well
 def samples(
     match_list, model_name="depth_and_luck", num_chains=4, num_samples=10000, **kwargs
 ):
-    """Get MCMC samples from the model fit to a given match_list.
+    """Get MCMC samples from the model fit to a match_list.
 
-    Parameters in ``kwargs`` will be passed to the python wrapper of
-        ``stan::services::sample::hmc_nuts_diag_e_adapt`` in pystan.
-
-    Args:
-        match_list (list): List of matches, each represented by a dict of the winner and loser.
-        model_name (str, optional): Model used for fitting. Defaults to "depth_and_luck". Options: {‘depth_and_luck’, ‘depth_only’, ‘luck_only’, ‘logistic_prior’}.
-        num_chains (int, optional): Number of chains STAN will use for sampling. Defaults to 4.
-        num_samples (int, optional): _description_. Defaults to 10000.
-        seed (int, optional): _description_. Defaults to 0.
-
-    Returns:
-        _type_: _description_
-    """
+    :param match_list: List of matches, each represented by a dict of the winner and loser.
+    :type match_list: list
+    :param model_name: Model used for fitting. Defaults to 'depth_and_luck'. Options: {‘depth_and_luck’, ‘depth_only’, ‘luck_only’, ‘logistic_prior’}.
+    :type model_name: str, optional
+    :param num_samples: Number of samples used per chain for MCMC sampling, defaults to 10000
+    :type num_samples: int, optional
+    :param num_chains: Number of chains used for MCMC sampling, defaults to 4
+    :type num_chains: int, optional
+    :return: pandas DataFrame containing sampled draws of scores and relevant parameters.
+    :rtype: DataFrame
+    """    
     # Give warning if the data set is too large for fast HMC sampling
     n = len(util.get_string_indices_dict(match_list))
     if n > 1000:

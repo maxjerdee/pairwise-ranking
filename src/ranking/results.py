@@ -8,42 +8,50 @@ import matplotlib.pyplot as plt
 from scipy.stats import gaussian_kde
 from . import util
 
-
 def scores(match_list, model_name="depth_and_luck", num_samples=10000, num_chains=4, force_mode=None):
     """Get fitted scores of players in a given model.
 
-    Args:
-        match_list (list): _description_
-        model_name (str, optional): _description_. Defaults to "depth_and_luck".
-        force_sampling (bool, optional): Force the use of MCMC sampling. Defaults to False.
-
-    Returns:
-        dict: Fitted scores of each participant in match_list.
-    """    
+    :param match_list: List of matches, each represented by a dict of the winner and loser.
+    :type match_list: list
+    :param model_name: Model used for fitting. Defaults to 'depth_and_luck'. Options: {‘depth_and_luck’, ‘depth_only’, ‘luck_only’, ‘logistic_prior’}.
+    :type model_name: str, optional
+    :param num_samples: Number of samples used per chain for MCMC sampling, defaults to 10000
+    :type num_samples: int, optional
+    :param num_chains: Number of chains used for MCMC sampling, defaults to 4
+    :type num_chains: int, optional
+    :param force_mode: Optionally force the point estimate mode to be either 'average' or 'MAP', otherwise defaults to 'MAP' when more than 1000 players are present.
+    :type force_mode: str or None, optional
+    :return: pandas DataFrame with columns of the labels, inferred scores, and score errors for each player.
+    :rtype: DataFrame
+    """     
     
     # Compute the number of participants present in match_list
     string_indices_dict = util.get_string_indices_dict(match_list)
     n = len(string_indices_dict)
 
+    # Check the model_name is supported
+    if model_name not in ['depth_and_luck','depth_only','luck_only','logistic_prior']:
+        raise AssertionError(f"model_name={model_name} not supported.")
+
     # Whether to find the expected values of the scores by sampling or use the MAP iteration method
-    mode = 'sampling' # 'sampling' or 'iteration'
+    mode = 'average' # 'average' or 'MAP'
     if force_mode == None:
         if n < 1000: # Prefer the sampling method if the data set is small enough
-            mode = 'sampling'
+            mode = 'average'
         else: # If the data set is too large, default to using the simple iterative method
             warnings.warn(
                 f"Data set contains {n} unique players, sampling may be slow for n > 1000.\n\
                         Defaulting to fast iterative method to find MAP estimates of the logistic_prior model.\n\
                             Can override this behavior with force_sampling=True."
             )
-            mode = 'iteration'
-    elif force_mode == 'sampling' or 'iteration':
+            mode = 'MAP'
+    elif force_mode == 'average' or 'MAP':
         mode = force_mode
     else:
         raise AssertionError(f"force_mode={force_mode} is not a valid option. \
-                             Options are [None, 'sampling','iteration']")
+                             Options are [None, 'average','MAP']")
 
-    if mode == 'sampling': 
+    if mode == 'average': 
         # Get samples from the posterior of this model fitted to this data set
         samples_df = ranking.samples(match_list,model_name=model_name, num_chains=num_chains, num_samples=num_samples)
 
@@ -100,17 +108,55 @@ def scores(match_list, model_name="depth_and_luck", num_samples=10000, num_chain
         return scores_df
 
 
-def ranks(match_list, model_name="depth_and_luck", num_samples=10000, num_chains=4, force_sampling=False):
-    scores_df = scores(match_list,model_name=model_name, num_samples=num_samples, num_chains=num_chains, force_sampling=force_sampling)
+def ranks(match_list, model_name="depth_and_luck", num_samples=10000, num_chains=4, force_mode=None):
+    """Find the rankings of the players according to a specified model.
+
+    :param match_list: List of matches, each represented by a dict of the winner and loser.
+    :type match_list: list
+    :param model_name: Model used for fitting. Defaults to 'depth_and_luck'. Options: {‘depth_and_luck’, ‘depth_only’, ‘luck_only’, ‘logistic_prior’}.
+    :type model_name: str, optional
+    :param num_samples: Number of samples used per chain for MCMC sampling, defaults to 10000
+    :type num_samples: int, optional
+    :param num_chains: Number of chains used for MCMC sampling, defaults to 4
+    :type num_chains: int, optional
+    :param force_mode: Optionally force the point estimate mode to be either 'average' or 'MAP', otherwise defaults to 'MAP' when more than 1000 players are present.
+    :type force_mode: str or None, optional
+    :return: Ranked list of the players in descending order of strength.
+    :rtype: list
+    """    
+    scores_df = scores(match_list,model_name=model_name, num_samples=num_samples, num_chains=num_chains, force_mode=force_mode)
     
     return list(scores_df['label'])
 
 
-def probability(match_list, winner_label, loser_label,model_name="depth_and_luck", num_samples=10000, num_chains=4, force_sampling=False, force_mode=None):
-    
+def probability(match_list, winner_label, loser_label,model_name="depth_and_luck", num_samples=10000, num_chains=4, force_mode=None):
+    """Inferred probability that one player will beat another, according to match_list data.
+
+    :param match_list: List of matches, each represented by a dict of the winner and loser.
+    :type match_list: list
+    :param winner_label: Label of the desired winner
+    :type winner_label: str
+    :param loser_label: Label of the desired loser
+    :type loser_label: str
+    :param model_name: Model used for fitting. Defaults to 'depth_and_luck'. Options: {‘depth_and_luck’, ‘depth_only’, ‘luck_only’, ‘logistic_prior’}.
+    :type model_name: str, optional
+    :param num_samples: Number of samples used per chain for MCMC sampling, defaults to 10000
+    :type num_samples: int, optional
+    :param num_chains: Number of chains used for MCMC sampling, defaults to 4
+    :type num_chains: int, optional
+    :param force_mode: Optionally force the point estimate mode to be either 'average' or 'MAP', otherwise defaults to 'MAP' when more than 1000 players are present.
+    :type force_mode: str or None, optional
+    :raises AssertionError: If winner_label or loser_label is not present in match_list. 
+    :return: Tuple of the inferred probability and the error in the estimation.
+    :rtype: tuple
+    """    
     # Compute the number of participants present in match_list
     string_indices_dict = util.get_string_indices_dict(match_list)
     n = len(string_indices_dict)
+
+    # Check the model_name is supported
+    if model_name not in ['depth_and_luck','depth_only','luck_only','logistic_prior']:
+        raise AssertionError(f"model_name={model_name} not supported.")
 
     # Check that the desired winner and loser are present in the data set
     if winner_label not in string_indices_dict.keys():
@@ -119,26 +165,26 @@ def probability(match_list, winner_label, loser_label,model_name="depth_and_luck
         raise AssertionError(f"{loser_label} not found in match_list.")
 
     # Whether to find the expected values of the scores by sampling or use the MAP iteration method
-    mode = 'sampling' # 'sampling' or 'iteration'
+    mode = 'average' # 'average' or 'MAP'
     if force_mode == None:
         if n < 1000: # Prefer the sampling method if the data set is small enough
-            mode = 'sampling'
+            mode = 'average'
         else: # If the data set is too large, default to using the simple iterative method
             warnings.warn(
                 f"Data set contains {n} unique players, sampling may be slow for n > 1000.\n\
                         Defaulting to fast iterative method to find MAP estimates of the logistic_prior model.\n\
                             Can override this behavior with force_sampling=True."
             )
-            mode = 'iteration'
-    elif force_mode == 'sampling' or 'iteration':
+            mode = 'MAP'
+    elif force_mode == 'average' or 'MAP':
         mode = force_mode
     else:
         raise AssertionError(f"force_mode={force_mode} is not a valid option. \
-                             Options are [None, 'sampling','iteration']")
+                             Options are [None, 'average','MAP']")
 
 
     # Use sampling if the data set is not too large or the user has specified to
-    if mode == 'sampling': 
+    if mode == 'average': 
         # Get samples from the posterior of this model fitted to this data set
         samples_df = ranking.samples(match_list,model_name=model_name, num_chains=num_chains, num_samples=num_samples)
 
@@ -197,6 +243,19 @@ def probability(match_list, winner_label, loser_label,model_name="depth_and_luck
         
 
 def depth_and_luck(match_list, model_name = 'depth_and_luck', num_samples=10000, num_chains=4):
+    """Get expected values of the depth and luck model parameters for a match_list by sampling. Returns appropriate stand-in parameters if model_name does not vary those parameters.
+
+    :param match_list: List of matches, each represented by a dict of the winner and loser.
+    :type match_list: list
+    :param model_name: Model used for fitting. Defaults to 'depth_and_luck'. Options: {‘depth_and_luck’, ‘depth_only’, ‘luck_only’, ‘logistic_prior’}.
+    :type model_name: str, optional
+    :param num_samples: Number of samples used per chain for MCMC sampling, defaults to 10000
+    :type num_samples: int, optional
+    :param num_chains: Number of chains used for MCMC sampling, defaults to 4
+    :type num_chains: int, optional
+    :return: dict of depth (beta) and luck (alpha)
+    :rtype: dict
+    """    
     # Get samples from the posterior of this model fitted to this data set
     samples_df = ranking.samples(match_list,model_name=model_name, num_chains=num_chains, num_samples=num_samples)
 
@@ -226,9 +285,18 @@ def depth_and_luck(match_list, model_name = 'depth_and_luck', num_samples=10000,
 
     alpha = np.mean(alphas)
     beta = np.mean(betas)
-    return alpha, beta 
+    return {"luck":alpha, "depth":beta} 
 
 def draw_depth_and_luck_posterior(match_list, num_samples=10000, num_chains=4):
+    """Draw the posterior distribution of the luck and depth parameters from sampled values of the depth_and_luck model.
+
+    :param match_list: List of matches, each represented by a dict of the winner and loser.
+    :type match_list: list
+    :param num_samples: Number of samples used per chain for MCMC sampling, defaults to 10000
+    :type num_samples: int, optional
+    :param num_chains: Number of chains used for MCMC sampling, defaults to 4
+    :type num_chains: int, optional
+    """    
     # We can only use the depth_and_luck full model for this purpose
     samples_df = ranking.samples(match_list,model_name='depth_and_luck', num_chains=num_chains, num_samples=num_samples)
 

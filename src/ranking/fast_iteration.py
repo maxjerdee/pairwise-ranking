@@ -4,7 +4,17 @@ import numpy as np
 
 # TODO: Implement as a wrapper of a c++ function (and also make sure the rest of pipeline is efficient)
 def logistic_prior_MAP(match_list,max_iters=1000,threshold=1e-8):
+    """Get MAP estimates of the logistic_prior model with rapid iterative methods.
 
+    :param match_list: List of matches, each represented by a dict of the winner and loser.
+    :type match_list: list
+    :param max_iters: Maximum number of iterations to perform, defaults to 1000
+    :type max_iters: int, optional
+    :param threshold: Average change in scores over an iteration at which to stop iterations, defaults to 1e-8
+    :type threshold: float, optional
+    :return: pandas DataFrame of labels, scores, and errors (inferred by change over an iteration).
+    :rtype: DataFrame
+    """    
     # Convert match_list to a sparse format of neighbors for iteration
     string_indices_dict = util.get_string_indices_dict(match_list)
     n = len(string_indices_dict)

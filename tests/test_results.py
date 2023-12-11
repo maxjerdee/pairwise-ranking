@@ -20,7 +20,7 @@ def test_logisticPriorMAP():
     n = len(true_scores)
 
     # Call function
-    scores_df = scores(match_list,force_mode='iteration')
+    scores_df = scores(match_list,force_mode='MAP')
 
     # Compare results
     for i in range(n):
@@ -52,7 +52,7 @@ def test_logisticPriorEs():
     n = len(true_scores)
 
     # Call function
-    scores_df = scores(match_list,force_mode='sampling',model_name='logistic_prior')
+    scores_df = scores(match_list,force_mode='average',model_name='logistic_prior')
 
     # Compare results
     for i in range(n):
@@ -84,7 +84,7 @@ def test_depthOnlyEs():
     n = len(true_scores)
 
     # Call function
-    scores_df = scores(match_list,force_mode='sampling',model_name='depth_only')
+    scores_df = scores(match_list,force_mode='average',model_name='depth_only')
 
     # Compare results
     for i in range(n):
@@ -116,7 +116,7 @@ def test_luckOnlyEs():
     n = len(true_scores)
 
     # Call function
-    scores_df = scores(match_list,force_mode='sampling',model_name='luck_only')
+    scores_df = scores(match_list,force_mode='average',model_name='luck_only')
 
     # Compare results
     for i in range(n):
@@ -148,7 +148,7 @@ def test_depthAndLuckEs():
     n = len(true_scores)
 
     # Call function
-    scores_df = scores(match_list,force_mode='sampling',model_name='depth_and_luck')
+    scores_df = scores(match_list,force_mode='average',model_name='depth_and_luck')
 
     # Compare results
     for i in range(n):
@@ -180,7 +180,7 @@ def test_logisticPriorMAP_probability():
     true_prob = float(line)
 
     # Call function
-    prob, prob_error = probability(match_list,'player_0','player_1',force_mode='iteration')
+    prob, prob_error = probability(match_list,'player_0','player_1',force_mode='MAP')
 
     # Compare results
     if np.abs(true_prob-prob) > deviations_threshold*prob_error:
@@ -200,7 +200,7 @@ def test_logisticPrior_probability():
     true_prob = float(line)
 
     # Call function
-    prob, prob_error = probability(match_list,'player_0','player_1',force_mode='sampling',model_name='logistic_prior')
+    prob, prob_error = probability(match_list,'player_0','player_1',force_mode='average',model_name='logistic_prior')
 
     # Compare results
     if np.abs(true_prob-prob) > deviations_threshold*prob_error:
@@ -220,7 +220,7 @@ def test_depthOnly_probability():
     true_prob = float(line)
 
     # Call function
-    prob, prob_error = probability(match_list,'player_0','player_1',force_mode='sampling',model_name='depth_only')
+    prob, prob_error = probability(match_list,'player_0','player_1',force_mode='average',model_name='depth_only')
 
     # Compare results
     if np.abs(true_prob-prob) > deviations_threshold*prob_error:
@@ -240,7 +240,7 @@ def test_luckOnly_probability():
     true_prob = float(line)
 
     # Call function
-    prob, prob_error = probability(match_list,'player_0','player_1',force_mode='sampling',model_name='luck_only')
+    prob, prob_error = probability(match_list,'player_0','player_1',force_mode='average',model_name='luck_only')
 
     # Compare results
     if np.abs(true_prob-prob) > deviations_threshold*prob_error:
@@ -260,7 +260,7 @@ def test_depthAndLuckOnly_probability():
     true_prob = float(line)
 
     # Call function
-    prob, prob_error = probability(match_list,'player_0','player_1',force_mode='sampling',model_name='depth_and_luck')
+    prob, prob_error = probability(match_list,'player_0','player_1',force_mode='average',model_name='depth_and_luck')
 
     # Compare results
     if np.abs(true_prob-prob) > deviations_threshold*prob_error:
