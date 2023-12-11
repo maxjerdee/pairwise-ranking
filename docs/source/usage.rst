@@ -17,7 +17,10 @@ To use pairwise-ranking, first install it using pip:
 Loading data
 ------------
 
-Match data may be imported from a variety of formats: .gml files, adjacency matrices, and lists of matches. The function ``ranking.read_match_list()`` attempts to import the data in these formats. 
+Match data may be imported from a variety of formats:
+.gml files, adjacency matrices, and lists of matches.
+The function ``ranking.read_match_list()`` attempts to import the data in these formats.
+Examples of data sets are given in the ``\data`` folder, and are cited in :doc:`data`.
 
 .. autofunction:: ranking.read_match_list()
 
