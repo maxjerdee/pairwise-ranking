@@ -12,7 +12,7 @@ from . import util
 def scores(
     match_list,
     model_name="depth_and_luck",
-    num_samples=10000,
+    num_samples=5000,
     num_chains=4,
     force_mode=None,
 ):
@@ -22,7 +22,7 @@ def scores(
     :type match_list: list
     :param model_name: Model used for fitting. Defaults to 'depth_and_luck'. Options: {‘depth_and_luck’, ‘depth_only’, ‘luck_only’, ‘logistic_prior’}.
     :type model_name: str, optional
-    :param num_samples: Number of samples used per chain for MCMC sampling, defaults to 10000
+    :param num_samples: Number of samples used per chain for MCMC sampling, defaults to 5000
     :type num_samples: int, optional
     :param num_chains: Number of chains used for MCMC sampling, defaults to 4
     :type num_chains: int, optional
@@ -133,7 +133,7 @@ def scores(
 def ranks(
     match_list,
     model_name="depth_and_luck",
-    num_samples=10000,
+    num_samples=5000,
     num_chains=4,
     force_mode=None,
 ):
@@ -143,7 +143,7 @@ def ranks(
     :type match_list: list
     :param model_name: Model used for fitting. Defaults to 'depth_and_luck'. Options: {‘depth_and_luck’, ‘depth_only’, ‘luck_only’, ‘logistic_prior’}.
     :type model_name: str, optional
-    :param num_samples: Number of samples used per chain for MCMC sampling, defaults to 10000
+    :param num_samples: Number of samples used per chain for MCMC sampling, defaults to 5000
     :type num_samples: int, optional
     :param num_chains: Number of chains used for MCMC sampling, defaults to 4
     :type num_chains: int, optional
@@ -168,7 +168,7 @@ def probability(
     winner_label,
     loser_label,
     model_name="depth_and_luck",
-    num_samples=10000,
+    num_samples=5000,
     num_chains=4,
     force_mode=None,
 ):
@@ -182,7 +182,7 @@ def probability(
     :type loser_label: str
     :param model_name: Model used for fitting. Defaults to 'depth_and_luck'. Options: {‘depth_and_luck’, ‘depth_only’, ‘luck_only’, ‘logistic_prior’}.
     :type model_name: str, optional
-    :param num_samples: Number of samples used per chain for MCMC sampling, defaults to 10000
+    :param num_samples: Number of samples used per chain for MCMC sampling, defaults to 5000
     :type num_samples: int, optional
     :param num_chains: Number of chains used for MCMC sampling, defaults to 4
     :type num_chains: int, optional
@@ -308,7 +308,7 @@ def probability(
 
 
 def depth_and_luck(
-    match_list, model_name="depth_and_luck", num_samples=10000, num_chains=4
+    match_list, model_name="depth_and_luck", num_samples=5000, num_chains=4
 ):
     """Get expected values of the depth and luck model parameters for a match_list by sampling. Returns appropriate stand-in parameters if model_name does not vary those parameters.
 
@@ -316,7 +316,7 @@ def depth_and_luck(
     :type match_list: list
     :param model_name: Model used for fitting. Defaults to 'depth_and_luck'. Options: {‘depth_and_luck’, ‘depth_only’, ‘luck_only’, ‘logistic_prior’}.
     :type model_name: str, optional
-    :param num_samples: Number of samples used per chain for MCMC sampling, defaults to 10000
+    :param num_samples: Number of samples used per chain for MCMC sampling, defaults to 5000
     :type num_samples: int, optional
     :param num_chains: Number of chains used for MCMC sampling, defaults to 4
     :type num_chains: int, optional
@@ -362,12 +362,12 @@ def depth_and_luck(
     return {"luck": alpha, "depth": beta}
 
 
-def draw_depth_and_luck_posterior(match_list, num_samples=10000, num_chains=4):
+def draw_depth_and_luck_posterior(match_list, num_samples=5000, num_chains=4):
     """Draw the posterior distribution of the luck and depth parameters from sampled values of the depth_and_luck model.
 
     :param match_list: List of matches, each represented by a dict of the winner and loser.
     :type match_list: list
-    :param num_samples: Number of samples used per chain for MCMC sampling, defaults to 10000
+    :param num_samples: Number of samples used per chain for MCMC sampling, defaults to 5000
     :type num_samples: int, optional
     :param num_chains: Number of chains used for MCMC sampling, defaults to 4
     :type num_chains: int, optional

@@ -6,8 +6,8 @@ project = "pairwise-ranking"
 copyright = "2023, Max Jerdee"
 author = "Max Jerdee"
 
-release = "0.1"
-version = "0.1.0"
+release = "1.0"
+version = "1.0.1"
 
 # -- Path setup --------------------------------------------------------------
 
@@ -42,7 +42,7 @@ templates_path = ["_templates"]
 
 # -- Options for HTML output
 
-html_theme = 'sphinx_rtd_theme'
+html_theme = "sphinx_rtd_theme"
 
 # -- Options for EPUB output
 epub_show_urls = "footnote"
