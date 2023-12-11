@@ -7,24 +7,24 @@ A variety of data sets are included in the package. Here are their citations:
 Sports
 ------------
 
-.. [Scrabble] Scrabble tournament records. `Cross-Tables Website <https://www.cross-tables.com/>`_. Accessed: 2023-10-07.
+- **Scrabble** Scrabble tournament records. `Cross-Tables Website <https://www.cross-tables.com/>`_. Accessed: 2023-10-07.
 
-.. [Basketball] N. Lauga, NBA games data. `Kaggle Dataset <https://www.kaggle.com/datasets/nathanlauga/nba-games/data>`_. Accessed: 2023-10-07.
+- **Basketball** N. Lauga, NBA games data. `Kaggle Dataset <https://www.kaggle.com/datasets/nathanlauga/nba-games/data>`_. Accessed: 2023-10-07.
 
-.. [Chess] Online chess match data from `lichess.com Kaggle Dataset <https://www.kaggle.com/datasets/arevel/chess-games>`_. Accessed: 2023-10-07.
+- **Chess** Online chess match data from `lichess.com Kaggle Dataset <https://www.kaggle.com/datasets/arevel/chess-games>`_. Accessed: 2023-10-07.
 
-.. [Tennis] J. Sackmann, ATP tennis data. `GitHub Repository <https://github.com/JeffSackmann/tennis_atp>`_. Accessed: 2023-10-07.
+- **Tennis** J. Sackmann, ATP tennis data. `GitHub Repository <https://github.com/JeffSackmann/tennis_atp>`_. Accessed: 2023-10-07.
 
-.. [Soccer] M. Jürisoo, International men's football results from 1872 to 2023. `Kaggle Dataset <https://www.kaggle.com/datasets/martj42/international-football-results-from-1872-to-2017>`_. Accessed: 2023-10-07.
+- **Soccer** M. Jürisoo, International men's football results from 1872 to 2023. `Kaggle Dataset <https://www.kaggle.com/datasets/martj42/international-football-results-from-1872-to-2017>`_. Accessed: 2023-10-07.
 
-.. [Video-games] Super Smash Bros. Melee head to head records. `Rankings Website <https://etossed.github.io/rankings.html>`_. Accessed: 2023-10-07.
+- **Video-games** Super Smash Bros. Melee head to head records. `Rankings Website <https://etossed.github.io/rankings.html>`_. Accessed: 2023-10-07.
 
 .. _human:
 
 Human hierarchies
 ------------
 
-.. [Friends] J. R. Udry, P. S. Bearman, and K. M. Harris, National Longitudinal Study of Adolescent Health (1997). This research uses data from Add Health, a program project directed by Kathleen Mullan Harris and designed by J. Richard Udry, Peter S. Bearman, and Kathleen Mullan Harris at the University of North Carolina at Chapel Hill, and funded by grant P01--HD31921 from the Eunice Kennedy Shriver National Institute of Child Health and Human Development, with cooperative funding from 23 other federal agencies and foundations. Special acknowledgment is due Ronald R. Rindfuss and Barbara Entwisle for assistance in the original design. Information on how to obtain the Add Health data files is available on the Add Health website `Add Health Website <https://www.cpc.unc.edu/addhealth>`_. No direct support was received from grant P01--HD31921 for this analysis.
+.. [Friends] J. R. Udry, P. S. Bearman, and K. M. Harris, National Longitudinal Study of Adolescent Health (1997). 
 
 .. [Departments] A. Clauset, S. Arbesman, and D. B. Larremore, Systematic inequality and hierarchy in faculty hiring networks. *Science Advances* **1**, e1400005 (2015).
 
