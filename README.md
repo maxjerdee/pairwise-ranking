@@ -1,21 +1,19 @@
 # pairwise-ranking
 <a href='https://pairwise-ranking.readthedocs.io/en/latest/?badge=latest'> <img src='https://readthedocs.org/projects/pairwise-ranking/badge/?version=latest' alt='Documentation status' /></a> <a href="https://badge.fury.io/py/pytrx"><img src="https://badge.fury.io/py/pairwise-ranking.svg" alt="PyPI status" height="18"></a> <br>
 
-### Models for ranking participants given pairwise comparisons between them
+### Models for ranking competitors and measuring the nature of hierarchies
 
-### Maximilian Jerdee, Mark Newman
+##### Maximilian Jerdee, Mark Newman
 
-Paired comparisons may arise from records of sports matches, social interactions, any other preferences between pairs of objects. From these data sets we can model the "strengths" of each participant. <br>
+Paired comparisons may arise from records of sports matches, social interactions, or from any set of preferences between pairs of objects. In these settings we can model the "strengths" of each participant, predict future contests, and infer the "depth-of-competition" and "luck" present in the hierarchies considered. <br>
 
-The models implemented implemented in this package are described in this paper:
+The models implemented in this package are based on this paper:
 
 M. Jerdee, M. E. J. Newman, Luck, skill, and depth of competition in games and social hierarchies, Preprint <a href="https://arxiv.org/abs/2312.04711">arxiv:2312.04711</a>
 (2023).
 
-As shown in the paper, these models have strong predictive performance and may also be used to infer the "depth-of-competition" and "luck" present in the hierarchies considered.
-
 ## Installation
-pairwise-ranking may be installed through pip:
+`pairwise-ranking` may be installed through pip:
 
 ```bash
 pip install pairwise-ranking
@@ -28,9 +26,9 @@ import ranking
 ```
 Note that this is not `import pairwise-ranking`.
 
-Files can be in a .gml network format, or read as a .txt format of either a list of matches or of an adjacency matrix of head-to-head records. See the `/data` directory for examples.
+Files can be in a .gml network format, or read from a .txt file of a list of matches or one of an adjacency matrix of head-to-head records. See the `/data` directory for examples of properly formatted data.
 
-After loading a match_list from a data set, the package may be used to rank participants, make predictions, and compute depth and luck. 
+Once a match_list has been loaded from a data set, the package may be used to rank participants, make predictions, and compute the depth and luck:
 ```python
 # Load data set
 match_list = ranking.read_match_list("data/gml_files/dogs.gml")
