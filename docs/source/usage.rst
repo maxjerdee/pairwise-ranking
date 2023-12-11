@@ -52,7 +52,7 @@ Sampling
 ----------------
 We implement a wrapper for Hamiltonian Monte Carlo (HMC) sampling via pystan for the models considered in this package:
 
-.. autofunction:: ranking.sampling()
+.. autofunction:: ranking.samples()
 
 These samples may also be used to visualize the posterior distribution of the depth and luck in the full model using ``matplotlib.pyplot``:
 
