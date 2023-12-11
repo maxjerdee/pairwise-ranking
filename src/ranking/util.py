@@ -26,7 +26,7 @@ def theta_to_beta(theta):
 
 
 def sigmoid(x):
-    """Sigmoid function, overflow protected
+    """Sigmoid function, overflow protected and vectorized
 
     Args:
         x (float):
@@ -34,10 +34,7 @@ def sigmoid(x):
     Returns:
         float:
     """
-    if x > 0:  # Normal sigmoid
-        return 1 / (1 + np.exp(-x))
-    else:  # Flip for large negative values
-        return np.exp(x) / (np.exp(x) + 1)
+    return np.where(x > 0, 1 / (1 + np.exp(-x)), np.exp(x) / (np.exp(x) + 1))
 
 
 def score_function(s, alpha=0.0, beta=1.0):

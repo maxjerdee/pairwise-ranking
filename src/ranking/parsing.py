@@ -2,7 +2,7 @@
 # TODO: Port to c++ to read large files faster
 from scipy.sparse import lil_matrix
 import networkx as nx
-
+import numpy as np
 
 def read_match_list_from_match_list(filename):
     """Read list of matches from a file with each line in "winner loser" format.
@@ -56,7 +56,21 @@ def read_match_list_from_gml(filename):
 
 
 def read_match_list_from_adj_matrix(filename):
-    pass
+    
+    adj_matrix = np.loadtxt(filename,dtype=int)
+    n = len(adj_matrix)
+
+    match_list = []
+    for i in range(n):
+        for j in range(n):
+            # Give each player a label from player_0 to player_(n-1) depending on where they appear in the given matrix
+            player_i_label = f"player_{i}"
+            player_j_label = f"player_{j}"
+            for t in range(adj_matrix[i,j]): # Add the number of matches which occured
+                match_list.append({"winner": player_i_label, "loser": player_j_label})
+
+    return match_list
+
 
 
 def read_match_list(filename):

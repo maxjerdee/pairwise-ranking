@@ -89,7 +89,6 @@ data {
 }
 parameters {
   vector[N] scores;                             // Score of each player
-  real<lower = 0> beta;                         // Depth of competition
 }
 model {
   for( k in 1:N){                               // P(s_i), prior on scores
@@ -148,9 +147,10 @@ def get_STAN_data(match_list, string_indices_dict):
             player2.append(pairing[1] + 1)  # STAN indices are unary
             # Win counts
             A12.append(0)
+            # Number of edges
+            m += 1
 
         # Increment the STAN_data variables
-        m += 1
         A12[pairing_indices_dict[pairing]] += 1
 
     STAN_data = {
@@ -169,7 +169,7 @@ def _samples(
     match_list_hashable,
     model_name="depth_and_luck",
     num_chains=4,
-    num_samples=1000,
+    num_samples=10000,
     **kwargs,
 ):
     # Convert the hashable match_list back into our usual form
@@ -177,6 +177,8 @@ def _samples(
 
     # STAN model string to be passed to pystan
     STAN_model_string = STAN_strings_dict[model_name]
+
+    print(f"Using model {model_name}")
 
     # Assign an index to each string in the match list
     string_indices_dict = util.get_string_indices_dict(match_list)
@@ -203,7 +205,7 @@ def _samples(
         STAN_index = index + 1  # STAN is unary
         STAN_label = f"scores.{STAN_index}"
         if STAN_label in df_original.columns:
-            df_dict[name] = df_original[STAN_label]
+            df_dict[f"{name}_score"] = df_original[STAN_label]
         else:
             raise AssertionError(f"{STAN_label} not found in pystan output.")
 
@@ -216,7 +218,7 @@ def _samples(
 # TODO: switch to a permanent cache between executables. Store samples in local directory?
 # Should probably add the option to not cache samples as well
 def samples(
-    match_list, model_name="depth_and_luck", num_chains=4, num_samples=1000, **kwargs
+    match_list, model_name="depth_and_luck", num_chains=4, num_samples=10000, **kwargs
 ):
     """Get MCMC samples from the model fit to a given match_list.
 
@@ -224,10 +226,10 @@ def samples(
         ``stan::services::sample::hmc_nuts_diag_e_adapt`` in pystan.
 
     Args:
-        match_list (list): _description_
+        match_list (list): List of matches, each represented by a dict of the winner and loser.
         model_name (str, optional): Model used for fitting. Defaults to "depth_and_luck". Options: {‘depth_and_luck’, ‘depth_only’, ‘luck_only’, ‘logistic_prior’}.
         num_chains (int, optional): Number of chains STAN will use for sampling. Defaults to 4.
-        num_samples (int, optional): _description_. Defaults to 1000.
+        num_samples (int, optional): _description_. Defaults to 10000.
         seed (int, optional): _description_. Defaults to 0.
 
     Returns:
@@ -239,7 +241,8 @@ def samples(
         # TODO: update warning with whatever we end up calling the fast iteration method
         warnings.warn(
             f"Data set contains {n} unique players, sampling may be slow for n > 1000.\n\
-                      Consider using fast iterative MAP estimation methods."
+                      Consider using fast iterative MAP estimation methods. \n\
+                        (Only available for the logistic_prior model)."
         )
 
     # Make the match_list hashable so that we can cache samples with lru_cache
