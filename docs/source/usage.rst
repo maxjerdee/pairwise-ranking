@@ -19,15 +19,15 @@ Loading data
 
 Match data may be imported from a variety of formats: .gml files, adjacency matrices, and lists of matches. The function ``ranking.read_match_list()`` attempts to import the data in these formats. 
 
-.. autofunction:: read_match_list()
+.. autofunction:: ranking.read_match_list()
 
 For a specific file format, the more specific functions can be used:
    
-.. autofunction:: read_match_list_from_match_list()
+.. autofunction:: ranking.read_match_list_from_match_list()
    
-.. autofunction:: read_match_list_from_gml()
+.. autofunction:: ranking.read_match_list_from_gml()
    
-.. autofunction:: read_match_list_from_adj_matrix()
+.. autofunction:: ranking.read_match_list_from_adj_matrix()
 
 .. _inference:
 
@@ -39,8 +39,18 @@ For the models implemented in this package, described in :ref:`models`, point es
 
 .. autofunction:: ranking.scores()
 
+Listed in decreasing order of the score estimates, the rankings from a ``match_list`` may be found: 
+
+.. autofunction:: ranking.ranks()
+
+We can also infer the probability that any given match will 
+
+.. autofunction:: ranking.probability()
+
 Sampling
 ----------------
-We implement a wrapper 
+We implement a wrapper for Hamiltonian Monte Carlo (HMC) sampling via pystan for the models considered in this package:
+
+.. autofunction:: ranking.sampling()
 
 
