@@ -1,5 +1,5 @@
 # pairwise-ranking
-<a href='https://pairwise-ranking.readthedocs.io/en/latest/?badge=latest'> <img src='https://readthedocs.org/projects/pairwise-ranking/badge/?version=latest' alt='Documentation status' /></a> <a href="https://badge.fury.io/py/pytrx"><img src="https://badge.fury.io/py/pairwise-ranking.svg" alt="PyPI status" height="18"></a> <br>
+<a href='https://pairwise-ranking.readthedocs.io/en/latest/?badge=latest'> <img src='https://readthedocs.org/projects/pairwise-ranking/badge/?version=latest' alt='Documentation status' /></a> <a href="https://badge.fury.io/py/pairwise-ranking"><img src="https://badge.fury.io/py/pairwise-ranking.svg" alt="PyPI status" height="18"></a> <br>
 
 ### Models for ranking competitors and measuring the nature of hierarchies
 

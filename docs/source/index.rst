@@ -6,7 +6,7 @@ Particularly, it implements Bayesian inference on extensions of the popular Brad
 popularly known as the basis for Elo scores. 
 
 Check out the :doc:`usage` section for further information, including
-how to :ref:`installation` the project.
+on :ref:`installation`.
 
 .. note::
 
