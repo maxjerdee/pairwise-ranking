@@ -7,7 +7,7 @@ copyright = "2023, Max Jerdee"
 author = "Max Jerdee"
 
 release = "1.0"
-version = "1.0.1"
+version = "1.0.2"
 
 # -- Path setup --------------------------------------------------------------
 

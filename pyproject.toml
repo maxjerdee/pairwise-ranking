@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "pairwise-ranking"
-version = "1.0.1"
+version = "1.0.2"
 description = "Infer rankings and nature of hierarchies from paired comparisons"
 readme = "README.md"
 authors = [

@@ -52,4 +52,4 @@ params = ranking.depth_and_luck(match_list)
 print(f"Depth: {params['depth']:.3f}, Luck: {params['luck']:.3f}")
 ```
 
-See the file `example.py` for examples of more advanced usage options and our <a href="https://pytrx.readthedocs.io/en/latest/Installation.html">readthedocs page</a> for further documentation and data set sources. 
+See the file `example.py` for examples of more advanced usage options and our <a href="https://pairwise-ranking.readthedocs.io/en/latest">readthedocs page</a> for further documentation and data set sources. 
