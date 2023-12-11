@@ -7,7 +7,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "pairwise-ranking"
 version = "1.0.1"
-description = "Infer strengths and rankings from paired comparisons"
+description = "Infer rankings and nature of hierarchies from paired comparisons"
 readme = "README.md"
 authors = [
     { name = "Maximilian Jerdee", email = "mjerdee@umich.edu" }, 
