@@ -12,6 +12,16 @@ how to :ref:`installation` the project.
 
    This project is under active development.
 
+.. _models:
+
+Models
+----------------
+
+This package implements a variety of models for pairwise ranking:
+
+- **Depth and Luck** ('depth_and_luck')
+   Full model allowing for the 
+
 Contents
 --------
 
