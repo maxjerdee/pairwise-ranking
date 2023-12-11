@@ -109,6 +109,7 @@ STAN_strings_dict = {
     "logistic_prior": logistic_prior_STAN_string,
 }
 
+
 def get_STAN_data(match_list, string_indices_dict):
     """Convert the match_list into a format for our STAN models.
 
@@ -118,7 +119,7 @@ def get_STAN_data(match_list, string_indices_dict):
     :type string_indices_dict: dict
     :return: representation of the match_list for STAN.
     :rtype: dict
-    """    
+    """
     n = len(string_indices_dict)  # Number of players
 
     # Initializing STAN_data variables to be built up
@@ -213,6 +214,7 @@ def _samples(
 
     return df
 
+
 # TODO: switch to a permanent cache between executables. Store samples in local directory?
 # Should probably add the option to not cache samples as well
 def samples(
@@ -230,7 +232,7 @@ def samples(
     :type num_chains: int, optional
     :return: pandas DataFrame containing sampled draws of scores and relevant parameters.
     :rtype: DataFrame
-    """    
+    """
     # Give warning if the data set is too large for fast HMC sampling
     n = len(util.get_string_indices_dict(match_list))
     if n > 1000:

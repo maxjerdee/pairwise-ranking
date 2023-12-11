@@ -1,5 +1,6 @@
 import numpy as np
 
+
 def beta_to_theta(beta):
     """Convert beta to theta
 
@@ -7,7 +8,7 @@ def beta_to_theta(beta):
     :type beta: float
     :return: theta (angle of score function at 0)
     :rtype: float
-    """    
+    """
     return np.arctan(beta / 4)
 
 
@@ -18,8 +19,9 @@ def theta_to_beta(theta):
     :type theta: float
     :return: beta depth parameter
     :rtype: float
-    """    
+    """
     return 4 * np.tan(theta)
+
 
 def sigmoid(x):
     """Sigmoid function, overflow protected and vectorized.
@@ -28,8 +30,9 @@ def sigmoid(x):
     :type x: float
     :return: sigmoid
     :rtype: float
-    """    
+    """
     return np.where(x > 0, 1 / (1 + np.exp(-x)), np.exp(x) / (np.exp(x) + 1))
+
 
 """Score function f(s) for luck and depth parameter values.
 
@@ -41,6 +44,8 @@ def sigmoid(x):
     Returns:
         float: score function value
     """
+
+
 def score_function(s, alpha=0.0, beta=1.0):
     """Score function f(s) for luck and depth parameter values.
 
@@ -52,8 +57,9 @@ def score_function(s, alpha=0.0, beta=1.0):
     :type beta: float, optional
     :return: score function value
     :rtype: float
-    """    
+    """
     return 0.5 * alpha + (1 - alpha) * sigmoid(beta * s)
+
 
 def get_string_indices_dict(match_list):
     """Generate a dict which maps each label found to an index in the order they appear.
@@ -62,7 +68,7 @@ def get_string_indices_dict(match_list):
     :type match_list: list
     :return: dict that associates to each found label a unique index.
     :rtype: dict
-    """    
+    """
     string_indices_dict = {}  # Dictionary of {string: index} for quick access
 
     for match in match_list:
@@ -76,6 +82,7 @@ def get_string_indices_dict(match_list):
 
     return string_indices_dict
 
+
 def make_match_list_hashable(match_list):
     """Turn a match_list into a hashable flattened tuple for caching.
 
@@ -83,12 +90,13 @@ def make_match_list_hashable(match_list):
     :type match_list: list
     :return: Flattened version of match_list
     :rtype: tuple
-    """    
+    """
     match_list_flat = []
     for match in match_list:
         match_list_flat.append(match["winner"])
         match_list_flat.append(match["loser"])
     return tuple(match_list_flat)
+
 
 def undo_make_match_list_hashable(match_list_hashable):
     """Undo the make_match_list_hashable operation to recover match_list
@@ -98,7 +106,7 @@ def undo_make_match_list_hashable(match_list_hashable):
     :raises AssertionError: If match_list_hashable does not have even length.
     :return: List of matches, each represented by a dict of the winner and loser.
     :rtype: list
-    """    
+    """
     if not len(match_list_hashable) % 2 == 0:
         raise AssertionError(
             f"match_list_hashable does not have an even number of entries."
