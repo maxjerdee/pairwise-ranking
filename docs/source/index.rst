@@ -34,12 +34,3 @@ This package implements a variety of models for pairwise ranking:
    Bradley-Terry model with a fixed logistic prior on the scores. This model is approximately described
    by the general model for fixed depth beta = 2.56 and luck alpha = 0. The maximum a posteriori (MAP)
    estimates of the scores in this model can be very efficiently found, unlike in the other models. 
-
-
-Contents
---------
-
-.. toctree::
-
-   usage
-   api

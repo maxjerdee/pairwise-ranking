@@ -43,9 +43,11 @@ Listed in decreasing order of the score estimates, the rankings from a ``match_l
 
 .. autofunction:: ranking.ranks()
 
-We can also infer the probability that any given match will 
+We can also infer the probability that an outcome between two players might occur:
 
 .. autofunction:: ranking.probability()
+
+.. _sampling:
 
 Sampling
 ----------------
@@ -53,4 +55,7 @@ We implement a wrapper for Hamiltonian Monte Carlo (HMC) sampling via pystan for
 
 .. autofunction:: ranking.sampling()
 
+These samples may also be used to visualize the posterior distribution of the depth and luck in the full model using ``matplotlib.pyplot``:
+
+.. autofunction:: ranking.draw_depth_and_luck_posterior()
 
