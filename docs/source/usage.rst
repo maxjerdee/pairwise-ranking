@@ -34,8 +34,7 @@ For a specific file format, the more specific functions can be used:
 Inference
 ----------------
 
-For the models implemented in this package, described in :ref:`models`, point estimates of the strength scores can be found
- with the function ``ranking.scores()``. 
+For the models implemented in this package, described in :ref:`models`, point estimates of the strength scores can be found with the function ``ranking.scores()``. 
 
 .. autofunction:: ranking.scores()
 
