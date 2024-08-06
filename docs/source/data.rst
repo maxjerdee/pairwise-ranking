@@ -1,6 +1,6 @@
 Data sets
 =====
-A variety of data sets are included in the package. Here are their citations:
+A variety of data sets are included in the package. Here are their links/citations:
 
 .. _sports:
 
@@ -26,12 +26,14 @@ Human hierarchies
 
 - **Friends** J. R. Udry, P. S. Bearman, and K. M. Harris, National Longitudinal Study of Adolescent Health (1997). 
 
-- **CS and Business Departments** A. Clauset, S. Arbesman, and D. B. Larremore, Systematic inequality and hierarchy in faculty hiring networks. *Science Advances* **1**, e1400005 (2015).
+- **CS and Business Departments** A. Clauset, S. Arbesman, and D. B. Larremore, Systematic inequality and hierarchy in faculty hiring networks. `Data set link <https://aaronclauset.github.io/facultyhiring/>`_. *Science Advances* **1**, e1400005 (2015).
 
 .. _animal:
 
 Animal hierarchies
 ------------
+
+- **DomArchive** Data compliation of all of the animal data sets (R package). `DomArchive <https://doi.org/10.1098/rstb.2020.0436/>`_. Accessed: 2023-10-07.
 
 - **Vervet monkeys** C. Vilette, T. Bonnell, P. Henzi, and L. Barrett, Comparing dominance hierarchy methods using a data-splitting approach with real-world data. *Behavioral Ecology* **31**, 1379--1390 (2020).
 
