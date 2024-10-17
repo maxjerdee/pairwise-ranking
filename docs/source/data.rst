@@ -9,7 +9,7 @@ Sports
 
 - **Chess** Online chess match data from `lichess.com Kaggle Dataset <https://www.kaggle.com/datasets/arevel/chess-games>`_. Accessed: 2023-10-07.
 
-- **Tennis** J. Sackmann, ATP tennis data. `GitHub Repository <https://github.com/JeffSackmann/tennis_atp>`_. Accessed: 2023-10-07. `CC BY-NC-SA 4.0 License <https://creativecommons.org/licenses/by-nc-sa/4.0/>`.
+- **Tennis** J. Sackmann, ATP tennis data. `GitHub Repository <https://github.com/JeffSackmann/tennis_atp>`_. Accessed: 2023-10-07. `CC BY-NC-SA 4.0 License <https://creativecommons.org/licenses/by-nc-sa/4.0/>`_.
 
 - **Soccer** M. Jürisoo, International men's football results from 1872 to 2023. `Kaggle Dataset <https://www.kaggle.com/datasets/martj42/international-football-results-from-1872-to-2017>`_. Accessed: 2023-10-07.
 
@@ -18,13 +18,13 @@ Sports
 Human hierarchies
 ------------
 
-- **CS and Business Departments** A. Clauset, S. Arbesman, and D. B. Larremore, Systematic inequality and hierarchy in faculty hiring networks. *Science Advances* **1**, e1400005 (2015). `CC BY-NC 4.0 License <https://creativecommons.org/licenses/by-nc/4.0/>`.
+- **CS and Business Departments** A. Clauset, S. Arbesman, and D. B. Larremore, Systematic inequality and hierarchy in faculty hiring networks. *Science Advances* **1**, e1400005 (2015). `CC BY-NC 4.0 License <https://creativecommons.org/licenses/by-nc/4.0/>`_.
 
 .. _animal:
 
 Animal hierarchies
 ------------
-The following data sets are part of `DomArchive <https://doi.org/10.1098/rstb.2020.0436>` under the `CC BY 4.0 license <https://creativecommons.org/licenses/by/4.0/>`.
+The following data sets are part of `DomArchive <https://doi.org/10.1098/rstb.2020.0436>`_ under the `CC BY 4.0 license <https://creativecommons.org/licenses/by/4.0/>`_.
 
 - **DomArchive** Data compliation of all of the animal data sets (R package). `DomArchive <https://doi.org/10.1098/rstb.2020.0436/>`_. Accessed: 2023-10-07.
 
