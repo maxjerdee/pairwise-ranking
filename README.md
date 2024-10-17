@@ -12,6 +12,8 @@ The models implemented in this package are based on this paper:
 M. Jerdee, M. E. J. Newman, Luck, skill, and depth of competition in games and social hierarchies, Preprint <a href="https://arxiv.org/abs/2312.04711">arxiv:2312.04711</a>
 (2023).
 
+The model and implementation is fully Bayesian, and makes use of the pystan wrapper for STAN to implement Hamiltonian Monte Carlo to make inferences. 
+
 ## Installation
 `pairwise-ranking` may be installed through pip:
 
